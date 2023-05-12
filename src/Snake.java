@@ -1,16 +1,31 @@
+import vars.GlobalVariables;
+
 public class Snake {
-    private int row, col;
-    public Snake(int row, int col) {
-        this.row = row;
-        this.col = col;
+    private int xPos, yPos;
+    public Snake(int xPos, int yPos) {
+        this.xPos = xPos;
+        this.yPos = yPos;
     }
     public int getRow() {
-        return row;
+        return xPos;
     }
     public int getCol() {
-        return col;
+        return yPos;
     }
     public void draw() {
+
+    }
+    public void moveUp() {
+        yPos -= GlobalVariables.getGridSize();
+    }
+    public void moveDown() {
+        yPos += GlobalVariables.getGridSize();
+    }
+    public void moveLeft() {
+        xPos -= GlobalVariables.getGridSize();
+    }
+    public void moveRight() {
+        xPos += GlobalVariables.getGridSize();
 
     }
 }

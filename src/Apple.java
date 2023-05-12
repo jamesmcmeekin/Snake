@@ -13,10 +13,11 @@ public class Apple {
         newApple();
     }
     public void newApple() {
-        appleX = rand.nextInt(GlobalVariables.getScreenWidth());
-        appleY = rand.nextInt(GlobalVariables.getScreenHeight());
+        appleX = rand.nextInt(GlobalVariables.getScreenWidth() / GlobalVariables.getGridSize()) * GlobalVariables.getGridSize();
+        appleY = rand.nextInt(GlobalVariables.getScreenHeight() / GlobalVariables.getGridSize()) * GlobalVariables.getGridSize();
     }
     public void drawApple() {
+        g.setColor(Color.red);
         g.fillOval(appleX, GlobalVariables.getGridSize(), appleY, GlobalVariables.getGridSize());
     }
 }

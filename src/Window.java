@@ -1,6 +1,5 @@
 import javax.swing.JFrame;
 
-import vars.GlobalVariables;
 public class Window extends JFrame {
     public Window() {
         this.add(new SnakeGame());
