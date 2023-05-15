@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.util.Random;
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class SnakeGame extends JPanel {
         for (int i = 0; i < snake.size(); i++) {
             g.fillRect(snake.get(i).getXPos(), snake.get(i).getYPos(), GlobalVariables.getGridSize(),
                     GlobalVariables.getGridSize());
+            System.out.println(
+                    "snake block " + i + "xpos " + snake.get(i).getXPos() + " ypos: " + snake.get(i).getYPos());
         }
         // draw da apple
         g.setColor(Color.red);
@@ -139,7 +142,6 @@ public class SnakeGame extends JPanel {
         snake.add(new Snake(400, 400));
         snake.add(new Snake(450, 400));
         snake.add(new Snake(500, 400));
-        snake.add(new Snake(550, 400));
     }
 
 }
