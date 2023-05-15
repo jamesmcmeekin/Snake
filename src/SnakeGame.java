@@ -6,8 +6,6 @@ import javax.swing.JPanel;
 import keys.CustomKeyAdapter;
 import vars.GlobalVariables;
 
-//import java.*
-//snake.run
 public class SnakeGame extends JPanel {
     private boolean isRunning = false;
     private Random rand;
@@ -23,6 +21,7 @@ public class SnakeGame extends JPanel {
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addKeyListener(new CustomKeyAdapter());
+        initSnake();
         startGame();
     }
 
@@ -33,18 +32,28 @@ public class SnakeGame extends JPanel {
 
     private void draw(Graphics g) {
         // draw the grid
+        g.setColor(Color.white);
         for (int i = 0; i < GlobalVariables.getGridHeight(); i++) {
             for (int j = 0; j < GlobalVariables.getGridWidth(); j++) {
-
+                g.drawRect(GlobalVariables.getGridSize() * j, GlobalVariables.getGridSize() * i,
+                        GlobalVariables.getGridSize(), GlobalVariables.getGridSize());
             }
         }
         // draw the snake
+        g.setColor(Color.GREEN);
+        for (int i = 0; i < snake.size(); i++) {
+            g.fillRect(snake.get(0).getXPos(), snake.get(0).getYPos(), GlobalVariables.getGridSize(),
+                    GlobalVariables.getGridSize());
+        }
         // draw da apple
+        g.setColor(Color.red);
+        g.fillRect(apple.getXPos(), apple.getYPos(), GlobalVariables.getGridSize(), GlobalVariables.getGridSize());
     }
 
     private void startGame() {
         isRunning = true;
         apple.newApple();
+        run();
     }
 
     public void move() {
@@ -99,6 +108,9 @@ public class SnakeGame extends JPanel {
                 isRunning = false;
             }
         }
+        if (!isRunning) {
+            gameOver();
+        }
     }
 
     // create a game over screen that displays the number of apples eaten, and a
@@ -115,11 +127,20 @@ public class SnakeGame extends JPanel {
             checkCollisions();
         }
         repaint();
-
+        while (true) {
+            run();
+        }
     }
 
     public void addPart() {
         snake.add(new Snake(snake.get(snake.size() - 1).getXPos(), snake.get(snake.size() - 1).getYPos()));
+    }
+
+    public void initSnake() {
+        snake.add(new Snake(400, 400));
+        snake.add(new Snake(450, 400));
+        snake.add(new Snake(500, 400));
+        snake.add(new Snake(550, 400));
     }
 
 }
