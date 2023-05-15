@@ -42,7 +42,7 @@ public class SnakeGame extends JPanel {
         // draw the snake
         g.setColor(Color.GREEN);
         for (int i = 0; i < snake.size(); i++) {
-            g.fillRect(snake.get(0).getXPos(), snake.get(0).getYPos(), GlobalVariables.getGridSize(),
+            g.fillRect(snake.get(i).getXPos(), snake.get(i).getYPos(), GlobalVariables.getGridSize(),
                     GlobalVariables.getGridSize());
         }
         // draw da apple
@@ -53,11 +53,13 @@ public class SnakeGame extends JPanel {
     private void startGame() {
         isRunning = true;
         apple.newApple();
-        run();
+        while (isRunning) {
+            run();
+        }
     }
 
     public void move() {
-        for (int i = snake.size(); i > 0; i--) {
+        for (int i = snake.size() - 1; i > 0; i--) {
             snake.set(i, snake.get(i - 1));
         }
         switch (GlobalVariables.getDirection()) {
@@ -127,9 +129,6 @@ public class SnakeGame extends JPanel {
             checkCollisions();
         }
         repaint();
-        while (true) {
-            run();
-        }
     }
 
     public void addPart() {
