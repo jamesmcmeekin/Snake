@@ -1,5 +1,6 @@
-
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -7,12 +8,13 @@ import javax.swing.JPanel;
 import keys.CustomKeyAdapter;
 import vars.GlobalVariables;
 
-public class SnakeGame extends JPanel {
+public class SnakeGame extends JPanel implements ActionListener {
     private boolean isRunning = false;
     private Random rand;
     private ArrayList<Snake> snake = new ArrayList<Snake>();
     private Apple apple;
     private Graphics g;
+    private Timer timer;
 
     public SnakeGame() {
         g = this.getGraphics();
@@ -29,6 +31,7 @@ public class SnakeGame extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
+
     }
 
     private void draw(Graphics g) {
@@ -56,9 +59,8 @@ public class SnakeGame extends JPanel {
     private void startGame() {
         isRunning = true;
         apple.newApple();
-        while (isRunning) {
-            run();
-        }
+        timer = new Timer(GlobalVariables.getDelay(), this);
+        timer.start();
     }
 
     public void move() {
@@ -125,7 +127,7 @@ public class SnakeGame extends JPanel {
     }
 
     // import world.satelite
-    public void run() {
+    public void actionPerformed(ActionEvent e) {
         if (isRunning) {
             move();
             checkApple();
@@ -142,6 +144,7 @@ public class SnakeGame extends JPanel {
         snake.add(new Snake(400, 400));
         snake.add(new Snake(450, 400));
         snake.add(new Snake(500, 400));
+        snake.add(new Snake(550, 400));
     }
 
 }

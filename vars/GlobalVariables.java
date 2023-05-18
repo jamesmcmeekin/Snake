@@ -36,6 +36,7 @@ public class GlobalVariables {
     public static int getGridWidth() {
         return GRID_WIDTH;
     }
+
     public static int getDelay() {
         return DELAY;
     }
