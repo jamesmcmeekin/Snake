@@ -11,7 +11,7 @@ import vars.GlobalVariables;
 public class SnakeGame extends JPanel implements ActionListener {
     private boolean isRunning = false;
     private Random rand;
-    private ArrayList<Snake> snake = new ArrayList<Snake>();
+    private ArrayList<BodyPart> snake = new ArrayList<BodyPart>();
     private Apple apple;
     private Timer timer;
 
@@ -120,7 +120,7 @@ public class SnakeGame extends JPanel implements ActionListener {
         for (int i = snake.size() - 1; i > 0; i--) {
             if (snake.get(0).getXPos() == snake.get(i).getXPos() && snake.get(0).getYPos() == snake.get(i).getYPos()) {
                 isRunning = false;
-                System.out.print("bad5");
+                System.out.print("head xpos " + snake.get(0).getXPos() + " body part " + i + " xPos" + snake.get(i).getXPos() + ". Head ypos " + snake.get(0).getYPos() + " body part " + i + " ypos " + snake.get(i).getYPos());
             }
         }
         if (!isRunning) {
@@ -146,12 +146,12 @@ public class SnakeGame extends JPanel implements ActionListener {
     }
 
     public void addPart() {
-        snake.add(new Snake(snake.get(snake.size() - 1).getXPos(), snake.get(snake.size() - 1).getYPos()));
+        snake.add(new BodyPart(snake.get(snake.size() - 1).getXPos(), snake.get(snake.size() - 1).getYPos()));
     }
 
     public void initSnake() {
-        snake.add(new Snake(400, 400));
-        snake.add(new Snake(450, 400));
+        snake.add(new Head(400, 400));  
+        snake.add(new BodyPart(450, 400));
     }
 
 }

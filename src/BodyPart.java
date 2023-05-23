@@ -1,13 +1,13 @@
 import vars.GlobalVariables;
 
-public class Snake {
+public class BodyPart {
     private int xPos, yPos;
 
-    public Snake() {
+    public BodyPart() {
 
     }
 
-    public Snake(int xPos, int yPos) {
+    public BodyPart(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
     }
@@ -20,9 +20,6 @@ public class Snake {
         return yPos;
     }
 
-    public void draw() {
-
-    }
 
     public void moveUp() {
         yPos -= GlobalVariables.getGridSize();
