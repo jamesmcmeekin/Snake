@@ -3,6 +3,10 @@ import vars.GlobalVariables;
 public class Snake {
     private int xPos, yPos;
 
+    public Snake() {
+
+    }
+
     public Snake(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;

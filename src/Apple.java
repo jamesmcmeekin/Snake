@@ -7,11 +7,9 @@ import vars.GlobalVariables;
 public class Apple {
     private int xPos, yPos;
     private Random rand;
-    private Graphics g;
 
-    public Apple(Random rand, Graphics g) {
+    public Apple(Random rand) {
         this.rand = rand;
-        this.g = g;
         newApple();
     }
 
@@ -20,11 +18,12 @@ public class Apple {
                 * GlobalVariables.getGridSize();
         yPos = rand.nextInt(GlobalVariables.getScreenHeight() / GlobalVariables.getGridSize())
                 * GlobalVariables.getGridSize();
+        System.out.println("xPos " + xPos + "yPos " + yPos);
     }
 
-    public void drawApple() {
+    public void drawApple(Graphics g) {
         g.setColor(Color.red);
-        g.fillOval(xPos, GlobalVariables.getGridSize(), yPos, GlobalVariables.getGridSize());
+        g.fillOval(xPos, yPos, GlobalVariables.getGridSize(), GlobalVariables.getGridSize());
     }
 
     public int getXPos() {

@@ -9,7 +9,7 @@ public class CustomKeyAdapter extends KeyAdapter {
         switch (k.getKeyCode()) {
             case KeyEvent.VK_UP:
                 if (GlobalVariables.getDirection() != 'D') {
-                    GlobalVariables.setDirection('D');
+                    GlobalVariables.setDirection('U');
                 }
                 break;
             case KeyEvent.VK_DOWN:
