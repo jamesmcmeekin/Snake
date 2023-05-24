@@ -1,8 +1,8 @@
 package vars;
 
 public class GlobalVariables {
-    private static final int SCREEN_WIDTH = 1000;
-    private static final int SCREEN_HEIGHT = 1000;
+    private static final int SCREEN_WIDTH = 800;
+    private static final int SCREEN_HEIGHT = 800;
     private static final int GRID_SIZE = 50;
     private static final int GRID_HEIGHT = GlobalVariables.getScreenHeight() / GRID_SIZE;
     private static final int GRID_WIDTH = GlobalVariables.getScreenWidth() / GRID_SIZE;
