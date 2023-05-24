@@ -7,7 +7,7 @@ public class GlobalVariables {
     private static final int GRID_HEIGHT = GlobalVariables.getScreenHeight() / GRID_SIZE;
     private static final int GRID_WIDTH = GlobalVariables.getScreenWidth() / GRID_SIZE;
     private static final int DELAY = 150;
-    private static char direction;
+    private static char direction = 'L';
 
     public static int getScreenWidth() {
         return SCREEN_WIDTH;

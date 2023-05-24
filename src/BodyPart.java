@@ -20,21 +20,11 @@ public class BodyPart {
         return yPos;
     }
 
-
-    public void moveUp() {
-        yPos -= GlobalVariables.getGridSize();
+    public void setXPos(int xPos) {
+        this.xPos = xPos;
     }
 
-    public void moveDown() {
-        yPos += GlobalVariables.getGridSize();
-    }
-
-    public void moveLeft() {
-        xPos -= GlobalVariables.getGridSize();
-    }
-
-    public void moveRight() {
-        xPos += GlobalVariables.getGridSize();
-
+    public void setYPos(int yPos) {
+        this.yPos = yPos;
     }
 }

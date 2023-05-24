@@ -11,6 +11,7 @@ import vars.GlobalVariables;
 public class SnakeGame extends JPanel implements ActionListener {
     private boolean isRunning = false;
     private Random rand;
+    private Head head;
     private ArrayList<BodyPart> snake = new ArrayList<BodyPart>();
     private Apple apple;
     private Timer timer;
@@ -45,6 +46,8 @@ public class SnakeGame extends JPanel implements ActionListener {
             }
             // draw the snake
             g.setColor(Color.GREEN);
+            g.fillRect(head.getXPos(), head.getYPos(), GlobalVariables.getGridSize(),
+                    GlobalVariables.getGridSize());
             for (int i = 0; i < snake.size(); i++) {
                 g.fillRect(snake.get(i).getXPos(), snake.get(i).getYPos(), GlobalVariables.getGridSize(),
                         GlobalVariables.getGridSize());
@@ -67,27 +70,32 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     public void move() {
         for (int i = snake.size() - 1; i > 0; i--) {
-            snake.set(i, snake.get(i - 1));
+            snake.get(i).setXPos(snake.get(i - 1).getXPos());
+            snake.get(i).setYPos(snake.get(i - 1).getYPos());
         }
+        snake.get(0).setXPos(head.getXPos());
+        snake.get(0).setYPos(head.getYPos());
+        
+
         switch (GlobalVariables.getDirection()) {
             case 'U':
-                snake.get(0).moveUp();
+                head.moveUp();
                 break;
             case 'D':
-                snake.get(0).moveDown();
+                head.moveDown();
                 break;
             case 'L':
-                snake.get(0).moveLeft();
+                head.moveLeft();
                 break;
             case 'R':
-                snake.get(0).moveRight();
+                head.moveRight();
                 break;
         }
     }
 
     // check if head is on the same grid as apple.
     public void checkApple() {
-        if (snake.get(0).getXPos() == apple.getXPos() && snake.get(0).getYPos() == apple.getYPos()) {
+        if (head.getXPos() == apple.getXPos() && head.getYPos() == apple.getYPos()) {
             apple.newApple();
             addPart();
         }
@@ -97,30 +105,32 @@ public class SnakeGame extends JPanel implements ActionListener {
     // of the borders
     public void checkCollisions() {
         // left of screen
-        if (snake.get(0).getXPos() < 0) {
+        if (head.getXPos() < 0) {
             isRunning = false;
             System.out.print("bad1");
         }
         // right of screen
-        if (snake.get(0).getXPos() > GlobalVariables.getScreenWidth()) {
+        if (head.getXPos() > GlobalVariables.getScreenWidth()) {
             isRunning = false;
             System.out.print("bad2");
         }
         // above screen
-        if (snake.get(0).getYPos() < 0) {
+        if (head.getYPos() < 0) {
             isRunning = false;
             System.out.print("bad3");
         }
         // below screen
-        if (snake.get(0).getYPos() > GlobalVariables.getScreenHeight()) {
+        if (head.getYPos() > GlobalVariables.getScreenHeight()) {
             isRunning = false;
             System.out.print("bad4");
         }
         // colliededededededededededed w snake
-        for (int i = snake.size() - 1; i > 0; i--) {
-            if (snake.get(0).getXPos() == snake.get(i).getXPos() && snake.get(0).getYPos() == snake.get(i).getYPos()) {
+        for (int i = snake.size() - 1; i >= 0; i--) {
+            if (head.getXPos() == snake.get(i).getXPos() && head.getYPos() == snake.get(i).getYPos()) {
                 isRunning = false;
-                System.out.print("head xpos " + snake.get(0).getXPos() + " body part " + i + " xPos" + snake.get(i).getXPos() + ". Head ypos " + snake.get(0).getYPos() + " body part " + i + " ypos " + snake.get(i).getYPos());
+                System.out.print("head xpos " + head.getXPos() + " body part " + i + " xPos "
+                        + snake.get(i).getXPos() + ". Head ypos " + head.getYPos() + " body part " + i
+                        + " ypos " + snake.get(i).getYPos());
             }
         }
         if (!isRunning) {
@@ -150,8 +160,9 @@ public class SnakeGame extends JPanel implements ActionListener {
     }
 
     public void initSnake() {
-        snake.add(new Head(400, 400));  
+        head = new Head(400, 400);
         snake.add(new BodyPart(450, 400));
+        snake.add(new BodyPart(500, 400));
     }
 
 }
