@@ -49,10 +49,9 @@ public class SnakeGame extends JPanel implements ActionListener {
             g.fillRect(head.getXPos(), head.getYPos(), GlobalVariables.getGridSize(),
                     GlobalVariables.getGridSize());
             for (int i = 0; i < snake.size(); i++) {
+                g.setColor(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
                 g.fillRect(snake.get(i).getXPos(), snake.get(i).getYPos(), GlobalVariables.getGridSize(),
                         GlobalVariables.getGridSize());
-                System.out.println(
-                        "snake block " + i + "xpos " + snake.get(i).getXPos() + " ypos: " + snake.get(i).getYPos());
             }
             // draw da apple
             apple.drawApple(g);
@@ -63,7 +62,7 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     private void startGame() {
         isRunning = true;
-        apple.newApple();
+        apple.newApple(snake);
         timer = new Timer(GlobalVariables.getDelay(), this);
         timer.start();
     }
@@ -96,7 +95,7 @@ public class SnakeGame extends JPanel implements ActionListener {
     // check if head is on the same grid as apple.
     public void checkApple() {
         if (head.getXPos() == apple.getXPos() && head.getYPos() == apple.getYPos()) {
-            apple.newApple();
+            apple.newApple(snake);
             addPart();
         }
     }
@@ -107,30 +106,23 @@ public class SnakeGame extends JPanel implements ActionListener {
         // left of screen
         if (head.getXPos() < 0) {
             isRunning = false;
-            System.out.print("bad1");
         }
         // right of screen
         if (head.getXPos() > GlobalVariables.getScreenWidth()) {
             isRunning = false;
-            System.out.print("bad2");
         }
         // above screen
         if (head.getYPos() < 0) {
             isRunning = false;
-            System.out.print("bad3");
         }
         // below screen
         if (head.getYPos() > GlobalVariables.getScreenHeight()) {
             isRunning = false;
-            System.out.print("bad4");
         }
         // colliededededededededededed w snake
         for (int i = snake.size() - 1; i >= 0; i--) {
             if (head.getXPos() == snake.get(i).getXPos() && head.getYPos() == snake.get(i).getYPos()) {
                 isRunning = false;
-                System.out.print("head xpos " + head.getXPos() + " body part " + i + " xPos "
-                        + snake.get(i).getXPos() + ". Head ypos " + head.getYPos() + " body part " + i
-                        + " ypos " + snake.get(i).getYPos());
             }
         }
         if (!isRunning) {
@@ -141,7 +133,6 @@ public class SnakeGame extends JPanel implements ActionListener {
     // create a game over screen that displays the number of apples eaten, and a
     // funny message
     public void gameOver() {
-        System.out.println("uh oh");
     }
 
     // import world.satelite
