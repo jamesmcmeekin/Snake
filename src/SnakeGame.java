@@ -12,14 +12,14 @@ public class SnakeGame extends JPanel implements ActionListener {
     private boolean isRunning = false;
     private Random rand;
     private Head head;
-    private ArrayList<BodyPart> snake = new ArrayList<BodyPart>();
-    private Apple apple;
+    private ArrayList<BodyPart> snake = new ArrayList<BodyPart>();;
     private Timer timer;
+    private ArrayList<Apple> pommes;
 
     public SnakeGame() {
         this.getGraphics();
         rand = new Random();
-        apple = new Apple(rand);
+        pommes = new ArrayList<Apple>();
         this.setPreferredSize(new Dimension(GlobalVariables.getScreenWidth(), GlobalVariables.getScreenHeight()));
         this.setBackground(Color.black);
         this.setFocusable(true);
@@ -54,7 +54,9 @@ public class SnakeGame extends JPanel implements ActionListener {
                         GlobalVariables.getGridSize());
             }
             // draw da apple
-            apple.drawApple(g);
+            for (int i = 0; i < pommes.size(); i++) {
+                pommes.get(i).drawApple(g);
+            }
         } else {
             gameOver();
         }
@@ -62,7 +64,14 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     private void startGame() {
         isRunning = true;
-        apple.newApple(snake);
+        for (int i = 0; i < GlobalVariables.getApples(); i++) {
+            pommes.add(new Apple(rand));
+
+        }
+        for (int i = 0; i < pommes.size(); i++) {
+            pommes.get(i).newApple(snake, pommes);
+        }
+
         timer = new Timer(GlobalVariables.getDelay(), this);
         timer.start();
     }
@@ -74,7 +83,6 @@ public class SnakeGame extends JPanel implements ActionListener {
         }
         snake.get(0).setXPos(head.getXPos());
         snake.get(0).setYPos(head.getYPos());
-        
 
         switch (GlobalVariables.getDirection()) {
             case 'U':
@@ -93,10 +101,12 @@ public class SnakeGame extends JPanel implements ActionListener {
     }
 
     // check if head is on the same grid as apple.
-    public void checkApple() {
-        if (head.getXPos() == apple.getXPos() && head.getYPos() == apple.getYPos()) {
-            apple.newApple(snake);
-            addPart();
+    public void checkApples() {
+        for (int i = 0; i < pommes.size(); i++) {
+            if (head.getXPos() == pommes.get(i).getXPos() && head.getYPos() == pommes.get(i).getYPos()) {
+                pommes.get(i).newApple(snake, pommes);
+                addPart();
+            }
         }
     }
 
@@ -140,7 +150,7 @@ public class SnakeGame extends JPanel implements ActionListener {
         if (isRunning) {
             checkCollisions();
             move();
-            checkApple();
+            checkApples();
 
         }
         repaint();

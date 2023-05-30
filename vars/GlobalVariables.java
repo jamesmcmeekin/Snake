@@ -1,9 +1,5 @@
 package vars;
 
-import java.util.concurrent.DelayQueue;
-
-import javax.xml.crypto.Data;
-
 public class GlobalVariables {
     private static final int SCREEN_WIDTH = 800;
     private static final int SCREEN_HEIGHT = 800;
@@ -12,6 +8,7 @@ public class GlobalVariables {
     private static final int GRID_WIDTH = GlobalVariables.getScreenWidth() / GRID_SIZE;
     private static int DELAY = 150;
     private static char direction = 'L';
+    private static int apples = 1;
 
     public static int getScreenWidth() {
         return SCREEN_WIDTH;
@@ -47,5 +44,13 @@ public class GlobalVariables {
 
     public static void setDelay(int d) {
         DELAY = d;
+    }
+
+    public static int getApples() {
+        return apples;
+    }
+
+    public static void setApples(int apples) {
+
     }
 }
