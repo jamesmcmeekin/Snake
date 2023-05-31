@@ -50,7 +50,7 @@ public class GlobalVariables {
         return apples;
     }
 
-    public static void setApples(int apples) {
-
+    public static void setApples(int a) {
+        apples = a;
     }
 }

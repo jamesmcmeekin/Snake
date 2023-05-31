@@ -25,13 +25,11 @@ public class Apple {
         }
         for (int i = 0; i < pommes.size(); i++) {
             if (newXPos == pommes.get(i).getXPos() && newYPos == pommes.get(i).getYPos()) {
-                System.out.println(pommes);
                 newApple(snake, pommes);
             }
         }
         xPos = newXPos;
         yPos = newYPos;
-
     }
 
     public void drawApple(Graphics g) {
