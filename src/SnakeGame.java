@@ -15,6 +15,7 @@ public class SnakeGame extends JPanel implements ActionListener {
     private ArrayList<BodyPart> snake = new ArrayList<BodyPart>();;
     private Timer timer;
     private ArrayList<Apple> pommes;
+    private int score = 0;
 
     public SnakeGame() {
         this.getGraphics();
@@ -57,6 +58,10 @@ public class SnakeGame extends JPanel implements ActionListener {
             for (int i = 0; i < pommes.size(); i++) {
                 pommes.get(i).drawApple(g);
             }
+            // da textttttttgttt4ttt4t43t4t4343tt43ttt34
+            Font font = new Font("Frutiger ", 1, 50);
+            g.setFont(font);
+            g.drawString("Score: " + score, 300, 50);
         } else {
             gameOver();
         }
@@ -69,7 +74,7 @@ public class SnakeGame extends JPanel implements ActionListener {
 
         }
         for (int i = 0; i < pommes.size(); i++) {
-            pommes.get(i).newApple(snake, pommes);
+            pommes.get(i).newApple(snake, pommes, head);
         }
 
         timer = new Timer(GlobalVariables.getDelay(), this);
@@ -98,14 +103,16 @@ public class SnakeGame extends JPanel implements ActionListener {
                 head.moveRight();
                 break;
         }
+        checkCollisions();
     }
 
     // check if head is on the same grid as apple.
     public void checkApples() {
         for (int i = 0; i < pommes.size(); i++) {
             if (head.getXPos() == pommes.get(i).getXPos() && head.getYPos() == pommes.get(i).getYPos()) {
-                pommes.get(i).newApple(snake, pommes);
+                pommes.get(i).newApple(snake, pommes, head);
                 addPart();
+                score++;
             }
         }
     }

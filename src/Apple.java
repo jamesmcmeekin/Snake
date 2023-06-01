@@ -13,19 +13,25 @@ public class Apple {
         this.rand = rand;
     }
 
-    public void newApple(ArrayList<BodyPart> snake, ArrayList<Apple> pommes) {
-        int newXPos = rand.nextInt(GlobalVariables.getScreenWidth() / GlobalVariables.getGridSize())
-                * GlobalVariables.getGridSize();
-        int newYPos = rand.nextInt(GlobalVariables.getScreenHeight() / GlobalVariables.getGridSize())
-                * GlobalVariables.getGridSize();
-        for (int i = 0; i < snake.size(); i++) {
-            if (snake.get(i).getXPos() == newXPos && snake.get(i).getYPos() == newYPos) {
-                newApple(snake, pommes);
+    public void newApple(ArrayList<BodyPart> snake, ArrayList<Apple> pommes, Head head) {
+        int newXPos, newYPos;
+        while (true) {
+            newXPos = rand.nextInt(GlobalVariables.getScreenWidth() / GlobalVariables.getGridSize())
+                    * GlobalVariables.getGridSize();
+            newYPos = rand.nextInt(GlobalVariables.getScreenHeight() / GlobalVariables.getGridSize())
+                    * GlobalVariables.getGridSize();
+            for (int i = 0; i < snake.size(); i++) {
+                if (snake.get(i).getXPos() != newXPos && snake.get(i).getYPos() != newYPos) {
+                    break;
+                }
             }
-        }
-        for (int i = 0; i < pommes.size(); i++) {
-            if (newXPos == pommes.get(i).getXPos() && newYPos == pommes.get(i).getYPos()) {
-                newApple(snake, pommes);
+            for (int i = 0; i < pommes.size(); i++) {
+                if (newXPos != pommes.get(i).getXPos() && newYPos != pommes.get(i).getYPos()) {
+                    break;
+                }
+            }
+            if (head.getXPos() != newXPos && head.getYPos() != newYPos) {
+                break;
             }
         }
         xPos = newXPos;
