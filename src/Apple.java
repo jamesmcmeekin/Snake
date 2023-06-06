@@ -16,9 +16,9 @@ public class Apple {
     public void newApple(ArrayList<BodyPart> snake, ArrayList<Apple> pommes, Head head) {
         int newXPos, newYPos;
         while (true) {
-            newXPos = rand.nextInt(GlobalVariables.getScreenWidth() / GlobalVariables.getGridSize())
+            newXPos = rand.nextInt(GlobalVariables.getGridHeight())
                     * GlobalVariables.getGridSize();
-            newYPos = rand.nextInt(GlobalVariables.getScreenHeight() / GlobalVariables.getGridSize())
+            newYPos = rand.nextInt(GlobalVariables.getGridHeight())
                     * GlobalVariables.getGridSize();
             for (int i = 0; i < snake.size(); i++) {
                 if (snake.get(i).getXPos() != newXPos && snake.get(i).getYPos() != newYPos) {

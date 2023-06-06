@@ -58,6 +58,7 @@ public class SnakeGame extends JPanel implements ActionListener {
             for (int i = 0; i < pommes.size(); i++) {
                 pommes.get(i).drawApple(g);
             }
+            g.setColor(Color.CYAN);
             // da textttttttgttt4ttt4t43t4t4343tt43ttt34
             Font font = new Font("Frutiger ", 1, 50);
             g.setFont(font);
@@ -69,10 +70,16 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     private void startGame() {
         isRunning = true;
+        if (GlobalVariables.getApples() > GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
+            GlobalVariables
+                    .setApples(GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - (snake.size() + 1));
+            System.out.println(GlobalVariables.getApples());
+        }
         for (int i = 0; i < GlobalVariables.getApples(); i++) {
             pommes.add(new Apple(rand));
 
         }
+
         for (int i = 0; i < pommes.size(); i++) {
             pommes.get(i).newApple(snake, pommes, head);
         }
@@ -158,13 +165,19 @@ public class SnakeGame extends JPanel implements ActionListener {
             checkCollisions();
             move();
             checkApples();
-
+            checkWon();
         }
         repaint();
     }
 
     public void addPart() {
         snake.add(new BodyPart(snake.get(snake.size() - 1).getXPos(), snake.get(snake.size() - 1).getYPos()));
+    }
+
+    public void checkWon() {
+        if (snake.size() == GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
+
+        }
     }
 
     public void initSnake() {
