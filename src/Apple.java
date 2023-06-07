@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+
+import javax.swing.TransferHandler.TransferSupport;
+
 import java.util.ArrayList;
 import vars.GlobalVariables;
 
@@ -19,7 +22,7 @@ public class Apple {
         boolean snakeCollision = false;
         boolean appleCollision = false;
         boolean headCollision = false;
-        while (!snakeCollision && !appleCollision && !headCollision) {
+        while (snakeCollision || appleCollision || headCollision) {
             snakeCollision = false;
             appleCollision = false;
             headCollision = false;

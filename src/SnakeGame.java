@@ -45,9 +45,9 @@ public class SnakeGame extends JPanel implements ActionListener {
             g.setColor(Color.GREEN);
             g.fillRect(head.getXPos(), head.getYPos(), GlobalVariables.getGridSize(),
                     GlobalVariables.getGridSize());
-            
+
             for (int i = 0; i < snake.size(); i++) {
-                
+
                 g.setColor(new Color(50, 205, 50));
                 g.fillRect(snake.get(i).getXPos(), snake.get(i).getYPos(), GlobalVariables.getGridSize(),
                         GlobalVariables.getGridSize());
@@ -69,7 +69,8 @@ public class SnakeGame extends JPanel implements ActionListener {
     private void startGame() {
         isRunning = true;
         if (GlobalVariables.getApples() > GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
-            GlobalVariables.setApples(GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - (snake.size() + 1));
+            GlobalVariables
+                    .setApples(GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - (snake.size() + 1));
         }
         for (int i = 0; i < GlobalVariables.getApples(); i++) {
             pommes.add(new Apple(rand));
@@ -113,7 +114,8 @@ public class SnakeGame extends JPanel implements ActionListener {
     public void checkApples() {
         for (int i = 0; i < pommes.size(); i++) {
             if (head.getXPos() == pommes.get(i).getXPos() && head.getYPos() == pommes.get(i).getYPos()) {
-                if (GlobalVariables.getApples() < GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - (snake.size())) {
+                if (GlobalVariables.getApples() < GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()
+                        - (snake.size())) {
                     pommes.get(i).newApple(snake, pommes, head);
 
                 } else {
