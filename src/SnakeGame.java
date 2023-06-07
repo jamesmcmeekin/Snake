@@ -202,7 +202,6 @@ public class SnakeGame extends JPanel implements ActionListener {
             checkCollisions();
             move();
             checkApples();
-            checkWon();
         }
         repaint();
     }
