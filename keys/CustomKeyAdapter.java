@@ -15,25 +15,28 @@ public class CustomKeyAdapter extends KeyAdapter {
                     if (GlobalVariables.getDirection() != 'D') {
                         GlobalVariables.setDirection('U');
                         lastDirectionChange = System.currentTimeMillis();
-                        cooldown = 150 - (lastDirectionChange - GlobalVariables.getRoundStartTime());
+                        cooldown = GlobalVariables.getDelay() - (lastDirectionChange - GlobalVariables.getRoundStartTime());
                     }
                     break;
                 case KeyEvent.VK_DOWN:
                     if (GlobalVariables.getDirection() != 'U') {
                         GlobalVariables.setDirection('D');
                         lastDirectionChange = System.currentTimeMillis();
+                        cooldown = GlobalVariables.getDelay() - (lastDirectionChange - GlobalVariables.getRoundStartTime());
                     }
                     break;
                 case KeyEvent.VK_LEFT:
                     if (GlobalVariables.getDirection() != 'R') {
                         GlobalVariables.setDirection('L');
                         lastDirectionChange = System.currentTimeMillis();
+                        cooldown = GlobalVariables.getDelay() - (lastDirectionChange - GlobalVariables.getRoundStartTime());
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
                     if (GlobalVariables.getDirection() != 'L') {
                         GlobalVariables.setDirection('R');
                         lastDirectionChange = System.currentTimeMillis();
+                        cooldown = GlobalVariables.getDelay() - (lastDirectionChange - GlobalVariables.getRoundStartTime());
                     }
                     break;
             }

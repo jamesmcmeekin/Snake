@@ -6,7 +6,7 @@ public class GlobalVariables {
     private static final int GRID_SIZE = 50;
     private static final int GRID_HEIGHT = GlobalVariables.getScreenHeight() / GRID_SIZE;
     private static final int GRID_WIDTH = GlobalVariables.getScreenWidth() / GRID_SIZE;
-    private static int DELAY = 150;
+    private static int delay = 150;
     private static char direction = 'L';
     private static int apples = 1;
     private static long RoundStartTime = System.currentTimeMillis();
@@ -40,11 +40,11 @@ public class GlobalVariables {
     }
 
     public static int getDelay() {
-        return DELAY;
+        return delay;
     }
 
     public static void setDelay(int d) {
-        DELAY = d;
+        delay = d;
     }
 
     public static int getApples() {

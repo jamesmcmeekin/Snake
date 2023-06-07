@@ -14,11 +14,12 @@ public class Apple {
     }
 
     public void newApple(ArrayList<BodyPart> snake, ArrayList<Apple> pommes, Head head) {
-        int newXPos, newYPos;
+        int newXPos = 0;
+        int newYPos = 0;
         boolean snakeCollision = false;
         boolean appleCollision = false;
         boolean headCollision = false;
-        while (true) {
+        while (!snakeCollision && !appleCollision && !headCollision) {
             snakeCollision = false;
             appleCollision = false;
             headCollision = false;
@@ -40,9 +41,6 @@ public class Apple {
             }
             if (head.getXPos() == newXPos && head.getYPos() == newYPos) {
                 headCollision = true;
-            }
-            if (!snakeCollision && !appleCollision && !headCollision) {
-                break;
             }
         }
         xPos = newXPos;
