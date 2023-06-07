@@ -45,8 +45,10 @@ public class SnakeGame extends JPanel implements ActionListener {
             g.setColor(Color.GREEN);
             g.fillRect(head.getXPos(), head.getYPos(), GlobalVariables.getGridSize(),
                     GlobalVariables.getGridSize());
+            
             for (int i = 0; i < snake.size(); i++) {
-                g.setColor(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+                
+                g.setColor(new Color(50, 205, 50));
                 g.fillRect(snake.get(i).getXPos(), snake.get(i).getYPos(), GlobalVariables.getGridSize(),
                         GlobalVariables.getGridSize());
             }
