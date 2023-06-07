@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         String difficulty = "";
-        System.out.print("wsg blud do u want ez med or radiant diffucutly? ");
+        System.out.print("wsg bro do u want ez med or radiant diffucutly? ");
         difficulty = s.next();
         if (difficulty.charAt(0) == 'e' || difficulty.charAt(0) == 'E') {
             GlobalVariables.setDelay(150);

@@ -15,22 +15,33 @@ public class Apple {
 
     public void newApple(ArrayList<BodyPart> snake, ArrayList<Apple> pommes, Head head) {
         int newXPos, newYPos;
+        boolean snakeCollision = false;
+        boolean appleCollision = false;
+        boolean headCollision = false;
         while (true) {
+            snakeCollision = false;
+            appleCollision = false;
+            headCollision = false;
             newXPos = rand.nextInt(GlobalVariables.getGridHeight())
                     * GlobalVariables.getGridSize();
             newYPos = rand.nextInt(GlobalVariables.getGridHeight())
                     * GlobalVariables.getGridSize();
             for (int i = 0; i < snake.size(); i++) {
-                if (snake.get(i).getXPos() != newXPos && snake.get(i).getYPos() != newYPos) {
+                if (snake.get(i).getXPos() == newXPos && snake.get(i).getYPos() == newYPos) {
+                    snakeCollision = true;
                     break;
                 }
             }
             for (int i = 0; i < pommes.size(); i++) {
-                if (newXPos != pommes.get(i).getXPos() && newYPos != pommes.get(i).getYPos()) {
+                if (newXPos == pommes.get(i).getXPos() && newYPos == pommes.get(i).getYPos()) {
+                    appleCollision = true;
                     break;
                 }
             }
-            if (head.getXPos() != newXPos && head.getYPos() != newYPos) {
+            if (head.getXPos() == newXPos && head.getYPos() == newYPos) {
+                headCollision = true;
+            }
+            if (!snakeCollision && !appleCollision && !headCollision) {
                 break;
             }
         }

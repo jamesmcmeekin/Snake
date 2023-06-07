@@ -1,5 +1,5 @@
 package vars;
-
+import java.lang.System;
 public class GlobalVariables {
     private static final int SCREEN_WIDTH = 800;
     private static final int SCREEN_HEIGHT = 800;
@@ -9,6 +9,7 @@ public class GlobalVariables {
     private static int DELAY = 150;
     private static char direction = 'L';
     private static int apples = 1;
+    private static long RoundStartTime = System.currentTimeMillis();
 
     public static int getScreenWidth() {
         return SCREEN_WIDTH;
@@ -52,5 +53,11 @@ public class GlobalVariables {
 
     public static void setApples(int a) {
         apples = a;
+    }
+    public static long getRoundStartTime() {
+        return RoundStartTime;
+    }
+    public static void setRoundStartTime(long r) {
+        RoundStartTime = r;
     }
 }

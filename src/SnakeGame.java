@@ -16,6 +16,7 @@ public class SnakeGame extends JPanel implements ActionListener {
     private Timer timer;
     private ArrayList<Apple> pommes;
     private int score = 0;
+    private boolean hasWon;
 
     public SnakeGame() {
         this.getGraphics();
@@ -36,14 +37,9 @@ public class SnakeGame extends JPanel implements ActionListener {
     }
 
     private void draw(Graphics g) {
-        // draw the grid
         if (isRunning) {
-            g.setColor(Color.white);
-            for (int i = 0; i < GlobalVariables.getGridHeight(); i++) {
-                for (int j = 0; j < GlobalVariables.getGridWidth(); j++) {
-                    g.drawRect(GlobalVariables.getGridSize() * j, GlobalVariables.getGridSize() * i,
-                            GlobalVariables.getGridSize(), GlobalVariables.getGridSize());
-                }
+            if (hasWon) {
+                won(g);
             }
             // draw the snake
             g.setColor(Color.GREEN);
@@ -64,7 +60,7 @@ public class SnakeGame extends JPanel implements ActionListener {
             g.setFont(font);
             g.drawString("Score: " + score, 300, 50);
         } else {
-            gameOver();
+            gameOver(g);
         }
     }
 
@@ -73,7 +69,6 @@ public class SnakeGame extends JPanel implements ActionListener {
         if (GlobalVariables.getApples() > GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
             GlobalVariables
                     .setApples(GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - (snake.size() + 1));
-            System.out.println(GlobalVariables.getApples());
         }
         for (int i = 0; i < GlobalVariables.getApples(); i++) {
             pommes.add(new Apple(rand));
@@ -117,11 +112,19 @@ public class SnakeGame extends JPanel implements ActionListener {
     public void checkApples() {
         for (int i = 0; i < pommes.size(); i++) {
             if (head.getXPos() == pommes.get(i).getXPos() && head.getYPos() == pommes.get(i).getYPos()) {
-                pommes.get(i).newApple(snake, pommes, head);
-                addPart();
+                if (GlobalVariables.getApples() < GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()
+                        - (snake.size())) {
+                    pommes.get(i).newApple(snake, pommes, head);
+
+                } else {
+                    pommes.remove(i);
+                }
                 score++;
+                addPart();
+
             }
         }
+        hasWon = checkWon();
     }
 
     // check if the snake collides with anypart of the body, or the head is past any
@@ -132,7 +135,7 @@ public class SnakeGame extends JPanel implements ActionListener {
             isRunning = false;
         }
         // right of screen
-        if (head.getXPos() > GlobalVariables.getScreenWidth()) {
+        if (head.getXPos() > GlobalVariables.getScreenWidth() - GlobalVariables.getGridSize()) {
             isRunning = false;
         }
         // above screen
@@ -140,7 +143,7 @@ public class SnakeGame extends JPanel implements ActionListener {
             isRunning = false;
         }
         // below screen
-        if (head.getYPos() > GlobalVariables.getScreenHeight()) {
+        if (head.getYPos() > GlobalVariables.getScreenHeight() - GlobalVariables.getGridSize()) {
             isRunning = false;
         }
         // colliededededededededededed w snake
@@ -150,18 +153,52 @@ public class SnakeGame extends JPanel implements ActionListener {
             }
         }
         if (!isRunning) {
-            gameOver();
+            timer.stop();
         }
     }
 
     // create a game over screen that displays the number of apples eaten, and a
     // funny message
-    public void gameOver() {
+    public void gameOver(Graphics g) {
+        String[] insults = { "ur so trash",
+                "give up already",
+                "you cant even beat snake?",
+                "consider not dying",
+                "maybe you are too old for games...",
+                "if you ate trash, it would be cannibalism",
+                "room temperature iq",
+                "if u added an eye to your head you would be a cyclops",
+                "congrats you got a participation trophy",
+                "do u eat crayons all day?",
+                "must be hereditary",
+                "its impossible to underestimate you",
+                "you are the reason toothepaste has instructions",
+                "you have the skill of a wet sock",
+                "you know that glue is not edible, right?",
+                "your brain must've been formed by spare parts",
+                "you are a walking dumpster of dissapointment",
+                "you must be a bone marrow baby",
+                "you effortlessly fail to meet expectations",
+                "you are out of your depth even in a parking lot puddle.",
+                "you have reached rock bottom, yet still manage to dig deeper",
+                "people will follow you out of morbid curiosity." };
+
+        g.setColor(Color.red);
+        g.setFont(new Font("Frutiger", Font.BOLD, 30));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Final Score: " + score,
+                (GlobalVariables.getScreenWidth() - metrics.stringWidth("Final Score: " + score)) / 2,
+                g.getFont().getSize());
+        String insult = insults[rand.nextInt(insults.length)];
+        g.drawString(insult, (GlobalVariables.getScreenWidth() - metrics.stringWidth(insult)) / 2,
+                GlobalVariables.getScreenHeight() / 2);
+
     }
 
     // import world.satelite
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
+            GlobalVariables.setRoundStartTime(System.currentTimeMillis());
             checkCollisions();
             move();
             checkApples();
@@ -174,10 +211,17 @@ public class SnakeGame extends JPanel implements ActionListener {
         snake.add(new BodyPart(snake.get(snake.size() - 1).getXPos(), snake.get(snake.size() - 1).getYPos()));
     }
 
-    public void checkWon() {
-        if (snake.size() == GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
+    public boolean checkWon() {
+        return snake.size() + 2 == GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth();
+    }
 
-        }
+    public void won(Graphics g) {
+        g.setColor(Color.green);
+        g.setFont(new Font("Frutiger", Font.BOLD, 50));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("congrats you beat the game",
+                (GlobalVariables.getScreenWidth() - metrics.stringWidth("congrats you beat the game")) / 2,
+                GlobalVariables.getScreenHeight() / 2);
     }
 
     public void initSnake() {
