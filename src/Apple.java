@@ -22,7 +22,7 @@ public class Apple {
         boolean snakeCollision = false;
         boolean appleCollision = false;
         boolean headCollision = false;
-        while (snakeCollision || appleCollision || headCollision) {
+        while (true) {
             snakeCollision = false;
             appleCollision = false;
             headCollision = false;
@@ -44,6 +44,9 @@ public class Apple {
             }
             if (head.getXPos() == newXPos && head.getYPos() == newYPos) {
                 headCollision = true;
+            }
+            if (!snakeCollision && !appleCollision && !headCollision) {
+                break;
             }
         }
         xPos = newXPos;
