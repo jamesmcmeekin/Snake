@@ -63,9 +63,12 @@ public class SnakeGame extends JPanel implements ActionListener {
         }
     }
 
+    // doers all the stuff needed be4 game starts
     private void startGame() {
         isRunning = true;
-        if (GlobalVariables.getApples() > GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
+        // checks if the apples inputted by the user is greater than the number of
+        // apples that can fit on the screen
+        if (GlobalVariables.getApples() > GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - 3) {
             GlobalVariables
                     .setApples(GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth() - (snake.size() + 1));
         }
@@ -111,7 +114,9 @@ public class SnakeGame extends JPanel implements ActionListener {
     public void checkApples() {
         for (int i = 0; i < pommes.size(); i++) {
             if (head.getXPos() == pommes.get(i).getXPos() && head.getYPos() == pommes.get(i).getYPos()) {
-                if (GlobalVariables.getApples() < GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()
+                // if there is space for this apple, move it to a different place, else, delete
+                // the object
+                if (pommes.size() < GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()
                         - (snake.size())) {
                     pommes.get(i).newApple(snake, pommes, head);
 
@@ -199,7 +204,7 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     }
 
-    // import world.satelite
+    // very important, makes the snake game actually animate
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
             GlobalVariables.setRoundStartTime(System.currentTimeMillis());
@@ -210,10 +215,12 @@ public class SnakeGame extends JPanel implements ActionListener {
         repaint();
     }
 
+    // adds new BodyPart object to array list
     public void addPart() {
         snake.add(new BodyPart(snake.get(snake.size() - 1).getXPos(), snake.get(snake.size() - 1).getYPos()));
     }
 
+    // checks if snake body is filling the map
     public boolean checkWon() {
         if (score + 2 == GlobalVariables.getGridHeight() * GlobalVariables.getGridWidth()) {
             isRunning = false;
@@ -224,6 +231,7 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     }
 
+    // call dis if checkWon is true
     public void won(Graphics g) {
         g.setColor(Color.green);
         g.setFont(new Font("Frutiger", Font.BOLD, 50));
@@ -233,6 +241,7 @@ public class SnakeGame extends JPanel implements ActionListener {
                 GlobalVariables.getScreenHeight() / 2);
     }
 
+    // creates Head object, adds two body parts to the snake array list
     public void initSnake() {
         head = new Head(400, 400);
         snake.add(new BodyPart(450, 400));
