@@ -17,7 +17,6 @@ public class Main {
         }
         System.out.print("numba of apples? ");
         GlobalVariables.setApples(s.nextInt());
-        ;
         Window window = new Window();
 
     }
