@@ -1,4 +1,4 @@
-import vars.GlobalVariables;
+
 
 public class BodyPart {
     private int xPos, yPos;
