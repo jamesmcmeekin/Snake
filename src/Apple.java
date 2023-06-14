@@ -17,9 +17,9 @@ public class Apple {
         int newXPos = 0;
         int newYPos = 0;
         boolean snakeCollision = false;
-        boolean appleCollision = false;
+        boolean appleCollision = true;
         boolean headCollision = false;
-        while (true) {
+        while (snakeCollision || appleCollision || headCollision) {
             snakeCollision = false;
             appleCollision = false;
             headCollision = false;
@@ -30,21 +30,19 @@ public class Apple {
             for (int i = 0; i < snake.size(); i++) {
                 if (snake.get(i).getXPos() == newXPos && snake.get(i).getYPos() == newYPos) {
                     snakeCollision = true;
-                    break;
+                    i = snake.size();
                 }
             }
             for (int i = 0; i < pommes.size(); i++) {
                 if (newXPos == pommes.get(i).getXPos() && newYPos == pommes.get(i).getYPos()) {
                     appleCollision = true;
-                    break;
+                    i = snake.size();
                 }
             }
             if (head.getXPos() == newXPos && head.getYPos() == newYPos) {
                 headCollision = true;
             }
-            if (!snakeCollision && !appleCollision && !headCollision) {
-                break;
-            }
+            
         }
         xPos = newXPos;
         yPos = newYPos;
