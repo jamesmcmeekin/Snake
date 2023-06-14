@@ -12,8 +12,11 @@ public class Main {
             System.out.println("booooooooo");
         } else if (difficulty.charAt(0) == 'm' || difficulty.charAt(0) == 'M') {
             GlobalVariables.setDelay(75);
-        } else {
+        } else if(difficulty.charAt(0) == 'r' || difficulty.charAt(0) == 'R') {
             GlobalVariables.setDelay(1);
+        } else {
+            System.out.println("since you cant read instructions, i will set the difficulty to ez for you.");
+            GlobalVariables.setDelay(150);;
         }
         System.out.print("numba of apples? ");
         GlobalVariables.setApples(s.nextInt());
