@@ -36,7 +36,7 @@ public class Apple {
             for (int i = 0; i < pommes.size(); i++) {
                 if (newXPos == pommes.get(i).getXPos() && newYPos == pommes.get(i).getYPos()) {
                     appleCollision = true;
-                    i = snake.size();
+                    i = pommes.size();
                 }
             }
             if (head.getXPos() == newXPos && head.getYPos() == newYPos) {
